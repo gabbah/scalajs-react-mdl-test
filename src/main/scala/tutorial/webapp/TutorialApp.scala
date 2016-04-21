@@ -14,8 +14,8 @@ import com.payalabs.scalajs.react.mdl.MaterialAble
 object TutorialApp extends JSApp {
   override def main(): Unit = {
     val mdlButton =
-      div(className := "mdl-button mdl-js-button mdl-button--fab mdl-button--colored")(
-        i(className := "material-icons")( "add")
+      button(className := "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent")(
+        "add"
       ).material
 
 
