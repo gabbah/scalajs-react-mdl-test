@@ -13,21 +13,13 @@ import com.payalabs.scalajs.react.mdl.MaterialAble
 
 object TutorialApp extends JSApp {
   override def main(): Unit = {
-    val button =
+    val mdlButton =
       div(className := "mdl-button mdl-js-button mdl-button--fab mdl-button--colored")(
         i(className := "material-icons")( "add")
       ).material
 
-    val stuff: ReactElement = html(
-      head,
-      body(
-        div(
-          h1("this is title"),
-          button
-        )
-      )
-    )
-    ReactDOM.render(stuff, document.body)
+
+    ReactDOM.render(mdlButton, document.body)
   }
 
 
