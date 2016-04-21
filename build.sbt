@@ -1,19 +1,38 @@
-enablePlugins(ScalaJSPlugin)
+lazy val scalajsTutorial =
+  Project(id = "scalajs-tutorial", base = file("."))
+    .enablePlugins(ScalaJSPlugin)
+    .settings(
+      name := "Scala.js Tutorial",
+      scalaVersion := "2.11.7",
+      // core = essentials only. No bells or whistles.
+      libraryDependencies ++= Seq(
+        "com.github.japgolly.scalajs-react" %%% "core" % "0.11.0",
+        "com.payalabs" %%% "scalajs-react-mdl" % "0.2.0-SNAPSHOT"),
+      // React JS itself (Note the filenames, adjust as needed, eg. to remove addons.)
+      jsDependencies ++= Seq(
 
-name := "Scala.js Tutorial"
+        "org.webjars.bower" % "react" % "15.0.1"
+          /        "react-with-addons.js"
+          minified "react-with-addons.min.js"
+          commonJSName "React",
 
-scalaVersion := "2.11.7"
+        "org.webjars.bower" % "react" % "15.0.1"
+          /         "react-dom.js"
+          minified  "react-dom.min.js"
+          dependsOn "react-with-addons.js"
+          commonJSName "ReactDOM",
 
-libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "0.8.1"
-libraryDependencies += "be.doeraene" %%% "scalajs-jquery" % "0.8.0"
+        "org.webjars.bower" % "react" % "15.0.1"
+          /         "react-dom-server.js"
+          minified  "react-dom-server.min.js"
+          dependsOn "react-dom.js"
+          commonJSName "ReactDOMServer"),
 
-jsDependencies += RuntimeDOM
+      persistLauncher in Compile := true,
+      persistLauncher in Test := false
+    )
 
-skip in packageJSDependencies := false
 
-// uTest settings
-libraryDependencies += "com.lihaoyi" %%% "utest" % "0.3.0" % "test"
-testFrameworks += new TestFramework("utest.runner.Framework")
 
-persistLauncher in Compile := true
-persistLauncher in Test := false
+
+
